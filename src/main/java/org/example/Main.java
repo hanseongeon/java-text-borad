@@ -68,12 +68,11 @@ public class Main {
                 String num = sc.nextLine();
                 int num1 = Integer.parseInt(num);
                 num1 -= 1;
-                if ((num1) != arr.get(num1).getIndexNum()) {
+                if ((num1+1) != arr.get(num1).getNum()) {
                     System.out.println("없는 게시물 번호입니다.");
                     continue;
                 }
                 arr.remove(num1);
-                arr.get(num1).setIndexNum(num1);
                 System.out.println("삭제가 완료 되었습니다.");
             } else if (cmd.equals("detail")) {
                 System.out.printf("상세보기 할 게시물 번호를 입력해주세요 :");
@@ -141,7 +140,7 @@ class text {
 }
 
 // 수정사항
-// 1. PRIVATE 이용하여 캡슐화
+// 1. PRIVATE 이용하여 캡슐화 O
 //2. Interger.parseInt 할때 문자들어갈경우 예외처리;
-//3. 저장되어있는 텍스트 가져와서 직접수정하기.
+//3. 저장되어있는 텍스트 가져와서 직접수정하기.O
 //4. 없는번호 예외처리
