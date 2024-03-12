@@ -2,15 +2,15 @@ package org.example;
 
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.util.Date;
+import java.util.Calendar;
 
 public class BoardApp {
     ArrayList<text> arr = new ArrayList<>();
 
     public void run() {
         Scanner sc = new Scanner(System.in);
-        ArrayList<Date> date = new ArrayList<>();
         ArrayList<PersonId> id = new ArrayList<>();
+        ArrayList<Calendar> cal = new ArrayList<>();
         // 반복 횟수 정할 수 없음 -> 무한 반복 구조
 
         ArrayList<Comments> com = new ArrayList<>();
@@ -45,7 +45,7 @@ public class BoardApp {
                 break;
             } else if (cmd.equals("add")) {
                 text t1 = new text();
-                Date date1 = new Date();
+                Calendar cal1 = Calendar.getInstance();
                 System.out.printf("게시물 제목을 입력해주세요 : ");
                 String title = sc.nextLine();
                 if (title.trim().isEmpty()) {
@@ -60,7 +60,7 @@ public class BoardApp {
                 t1.setNum(Textnumber);
                 t1.setIndexNum(indexNum);
                 arr.add(t1);
-                date.add(date1);
+                cal.add(cal1);
                 indexNum++;
 
                 System.out.println("게시물이 저장 되었습니다.");
@@ -110,8 +110,8 @@ public class BoardApp {
                 }
                 text t = new text();
                 t = arr.get(index);
-                Date d = new Date();
-                d = date.get(index);
+                Calendar cal1 = Calendar.getInstance();
+                cal1 = cal.get(index);
                 int view = arr.get(index).getViews();
                 view++;
                 arr.get(index).setViews(view);
@@ -120,7 +120,7 @@ public class BoardApp {
                 System.out.println("번호 : " + t.getNum());
                 System.out.println("제목 : " + t.getTitle());
                 System.out.println("내용 : " + t.getContent());
-                System.out.println("등록 날짜 :" + d);
+                System.out.println("등록 날짜 : " + cal1.get(Calendar.YEAR)+"."+(cal1.get(Calendar.MONTH)+1)+"."+cal1.get(Calendar.DAY_OF_MONTH)+" "+cal1.get(Calendar.HOUR)+":"+cal1.get(Calendar.MINUTE)+":"+cal1.get(Calendar.SECOND));
                 System.out.println("조회수 :" + t.getViews());
                 System.out.println("====================");
                 System.out.printf("상세보기 기능을 선택해주세요(1. 댓글 등록, 2. 추천, 3. 수정, 4. 삭제, 5. 목록으로) :");

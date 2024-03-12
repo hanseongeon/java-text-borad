@@ -9,6 +9,8 @@ class text {
     private int indexNum;
     private int views;
 
+
+
     public int getViews() {
         return views;
     }
