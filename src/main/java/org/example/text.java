@@ -1,6 +1,7 @@
 package org.example;
 
 class text {
+    Comments com = new Comments();
     private String title;
     private String content;
 

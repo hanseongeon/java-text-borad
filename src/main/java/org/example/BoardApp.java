@@ -5,11 +5,14 @@ import java.util.Scanner;
 import java.util.Date;
 
 public class BoardApp {
+    ArrayList<text> arr = new ArrayList<>();
+
     public void run() {
         Scanner sc = new Scanner(System.in);
         ArrayList<Date> date = new ArrayList<>();
         // 반복 횟수 정할 수 없음 -> 무한 반복 구조
-        ArrayList<text> arr = new ArrayList<>();
+
+        ArrayList<Comments> com = new ArrayList<>();
         int Textnumber = 0;
         int indexNum = 0;
 
@@ -61,52 +64,61 @@ public class BoardApp {
             } else if (cmd.equals("update")) {
                 System.out.printf("수정할 게시물 번호 : ");
                 int num1 = Integer.parseInt(sc.nextLine());
-                num1 -= 1;
+                int index = findIndexById(num1);
+                if(index == -1){
+                    System.out.println("없는게시물 입니다.");
+                    continue;
+                }
 
                 System.out.printf("변경할 제목 : ");
                 String upTitle = sc.nextLine();
                 System.out.printf("변경할 내용 : ");
                 String upContent = sc.nextLine();
-                arr.get(num1).setTitle(upTitle);
-                arr.get(num1).setContent(upContent);
+                arr.get(index).setTitle(upTitle);
+                arr.get(index).setContent(upContent);
                 System.out.println("수정이 완료 되었습니다.");
             } else if (cmd.equals("delete")) {
                 System.out.printf("삭제할 게시물 번호 : ");
                 int num1 = Integer.parseInt(sc.nextLine());
 
-                for (int i = 0; i < arr.size(); i++) {
-                    text t = arr.get(i);
-                    if (t.getNum() == num1) {
-                        arr.remove(i);
-                        break;
-                    }
+                int index = findIndexById(num1);
+                if(index == -1){
+                    System.out.println("없는게시물 입니다.");
+                    continue;
                 }
-
-
+                arr.remove(index);
 
                 System.out.println("삭제가 완료 되었습니다.");
             } else if (cmd.equals("detail")) {
                 System.out.printf("상세보기 할 게시물 번호를 입력해주세요 :");
                 int num1 = Integer.parseInt(sc.nextLine());
-                num1 -= 1;
+                int index = findIndexById(num1);
+                if(index == -1){
+                    System.out.println("없는게시물 입니다.");
+                    continue;
+                }
                 text t = new text();
-                t = arr.get(num1);
+                t = arr.get(index);
                 Date d = new Date();
-                d = date.get(num1);
-                int view = arr.get(num1).getViews();
+                d = date.get(index);
+                int view = arr.get(index).getViews();
                 view++;
-                arr.get(num1).setViews(view);
+                arr.get(index).setViews(view);
                 t.setViews(view);
-                System.out.printf("=====%d번 게시물=====\n",t.getNum());
+                System.out.printf("=====%d번 게시물=====\n", t.getNum());
                 System.out.println("번호 : " + t.getNum());
                 System.out.println("제목 : " + t.getTitle());
                 System.out.println("내용 : " + t.getContent());
                 System.out.println("등록 날짜 :" + d);
-                System.out.println("조회수 :"+t.getViews());
+                System.out.println("조회수 :" + t.getViews());
                 System.out.println("====================");
                 System.out.printf("상세보기 기능을 선택해주세요(1. 댓글 등록, 2. 추천, 3. 수정, 4. 삭제, 5. 목록으로) :");
                 int choice = Integer.parseInt(sc.nextLine());
-                if(choice == 5){
+                if (choice == 1) {
+                    System.out.printf("댓글 내용 :");
+                    String comments = sc.nextLine();
+
+                } else if (choice == 5) {
                     continue;
                 }
             } else if (cmd.equals("search")) {
@@ -129,8 +141,20 @@ public class BoardApp {
 
         }
 
-        // 1. 반복문 제어 하던 방법 : 반복 횟수 세서 특정 횟수 지나면 탈출
-        // 2. break문을 사용하여 강제 탈출 가능
+
+    }
+
+    public int findIndexById(int id) {
+
+        for (int i = 0; i < arr.size(); i++) {
+            text t1 = arr.get(i);
+
+            if (t1.getNum() == id) {
+                return i; // 원하는 것은 찾은 즉시 종료.
+            }
+        }
+
+        return -1;
     }
 }
 
