@@ -10,18 +10,18 @@ public class BoardApp {
         ArrayList<Date> date = new ArrayList<>();
         // 반복 횟수 정할 수 없음 -> 무한 반복 구조
         ArrayList<text> arr = new ArrayList<>();
-        ArrayList<text> test = new ArrayList<>();
-        int Textnumber = 3;
-        int indexNum = 3;
-        text a = new text();
-        text a2 = new text();
-        text a3 = new text();
-        a.test();
-        test.add(a);
-        a2.test2();
-        test.add(a2);
-        a3.test3();
-        test.add(a3);
+        int Textnumber = 0;
+        int indexNum = 0;
+
+//        text a = new text();
+//        text a2 = new text();
+//        text a3 = new text();
+//        a.test();
+//        arr.add(a);
+//        a2.test2();
+//        arr.add(a2);
+//        a3.test3();
+//        arr.add(a3);
         while (true) { // 반복 조건이 true이기 떄문에 무한 반복
 
             System.out.printf("명령어 : ");
@@ -52,14 +52,6 @@ public class BoardApp {
                 System.out.println("게시물이 저장 되었습니다.");
             } else if (cmd.equals("list")) {
 
-                for(text t2 : test){
-                    System.out.println("===========");
-                    System.out.println("번호 : " + t2.getNum());
-                    System.out.println("제목 : " + t2.getTitle());
-                    System.out.println("===========");
-                }
-
-
                 for (text t1 : arr) {
                     System.out.println("===========");
                     System.out.println("번호 : " + t1.getNum());
@@ -70,34 +62,23 @@ public class BoardApp {
                 System.out.printf("수정할 게시물 번호 : ");
                 int num1 = Integer.parseInt(sc.nextLine());
                 num1 -= 1;
-                if ((num1 + 1) != arr.get(num1).getNum()) {
-                    System.out.println("없는 게시물 번호입니다.");
-                    continue;
-                }
+
                 System.out.printf("변경할 제목 : ");
                 String upTitle = sc.nextLine();
                 System.out.printf("변경할 내용 : ");
                 String upContent = sc.nextLine();
                 arr.get(num1).setTitle(upTitle);
                 arr.get(num1).setContent(upContent);
-                arr.get(num1).setNum((num1 + 1));
                 System.out.println("수정이 완료 되었습니다.");
             } else if (cmd.equals("delete")) {
                 System.out.printf("삭제할 게시물 번호 : ");
                 int num1 = Integer.parseInt(sc.nextLine());
 
                 for (int i = 0; i < arr.size(); i++) {
-                    int targetId = arr.get(i).getNum();
-                    if (targetId == num1) {
+                    text t = arr.get(i);
+                    if (t.getNum() == num1) {
                         arr.remove(i);
-                    }
-                }
-
-                for (int i = 0; i < test.size(); i++) {
-                    int targetId = test.get(i).getNum();
-                    if (targetId == num1) {
-                        test.remove(i);
-
+                        break;
                     }
                 }
 
@@ -106,22 +87,43 @@ public class BoardApp {
                 System.out.println("삭제가 완료 되었습니다.");
             } else if (cmd.equals("detail")) {
                 System.out.printf("상세보기 할 게시물 번호를 입력해주세요 :");
-                String num = sc.nextLine();
-                int num1 = Integer.parseInt(num);
+                int num1 = Integer.parseInt(sc.nextLine());
                 num1 -= 1;
-                if (num1 >= arr.size()) {
-                    System.out.println("존재하지 않는 게시물 번호입니다.");
-                    continue;
-                }
                 text t = new text();
                 t = arr.get(num1);
                 Date d = new Date();
                 d = date.get(num1);
-                System.out.println("===========");
+                int view = arr.get(num1).getViews();
+                view++;
+                arr.get(num1).setViews(view);
+                t.setViews(view);
+                System.out.printf("=====%d번 게시물=====\n",t.getNum());
                 System.out.println("번호 : " + t.getNum());
                 System.out.println("제목 : " + t.getTitle());
                 System.out.println("내용 : " + t.getContent());
                 System.out.println("등록 날짜 :" + d);
+                System.out.println("조회수 :"+t.getViews());
+                System.out.println("====================");
+                System.out.printf("상세보기 기능을 선택해주세요(1. 댓글 등록, 2. 추천, 3. 수정, 4. 삭제, 5. 목록으로) :");
+                int choice = Integer.parseInt(sc.nextLine());
+                if(choice == 5){
+                    continue;
+                }
+            } else if (cmd.equals("search")) {
+                System.out.printf("검색 키워드를 입력해주세요 :");
+                String keyWord = sc.nextLine();
+                boolean contains = false;
+                for (text t : arr) {
+                    if (t.getTitle().contains(keyWord)) {
+                        contains = true;
+                        System.out.println("번호 : " + t.getNum());
+                        System.out.println("제목 : " + t.getTitle());
+                    }
+                }
+                if (!contains) {
+                    System.out.println("검색 결과가 없습니다.");
+                }
+
             }
 
 
@@ -132,64 +134,6 @@ public class BoardApp {
     }
 }
 
-class text {
-    private String title;
-    private String content;
-
-    private int num;
-    private int indexNum;
-
-    public void setIndexNum(int indexNum) {
-        this.indexNum = indexNum;
-    }
-
-    public int getIndexNum() {
-        return indexNum;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public String getContent() {
-        return content;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public void setContent(String content) {
-        this.content = content;
-    }
-
-    public void setNum(int num) {
-        this.num = num;
-    }
-
-    public int getNum() {
-        return num;
-    }
-
-    void test() {
-        this.num = 1;
-        this.title = "안녕하세요.";
-        this.content = "안녕하세여.";
-    }
-
-    void test2() {
-        this.num = 2;
-        this.title = "반갑습니다.";
-        this.content = "반갑습니다.";
-    }
-
-    void test3() {
-        this.num = 3;
-        this.title = "다음에봐요.";
-        this.content = "다음에봐요.";
-    }
-
-}
 
 // 수정사항
 // 1. PRIVATE 이용하여 캡슐화 O
