@@ -58,6 +58,7 @@ public class BoardApp {
                     String title = sc.nextLine();
                     if (title.trim().isEmpty()) {
                         System.out.println("잘못된 입력 방법입니다. 다시 시도해주세요.");
+                        continue;
                     }
                     t1.setTitle(title);
                     System.out.printf("게시물 내용을 입력해주세요 : ");
