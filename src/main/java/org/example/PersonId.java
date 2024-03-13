@@ -5,6 +5,7 @@ public class PersonId {
     String id;
     String pw;
     String nickName;
+    int like;
 
     int memberNumber;
 
@@ -56,5 +57,13 @@ public class PersonId {
 
     public void setNickName(String nickName) {
         this.nickName = nickName;
+    }
+
+    public int getLike() {
+        return like;
+    }
+
+    public void setLike(int like) {
+        this.like = like;
     }
 }

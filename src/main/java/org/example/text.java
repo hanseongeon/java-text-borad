@@ -11,6 +11,7 @@ class text {
 
     private int views;
     private String nickName;
+    private int like;
     text (){
 
     }
@@ -63,22 +64,11 @@ class text {
         return num;
     }
 
-    void test() {
-        this.num = 1;
-        this.title = "안녕하세요.";
-        this.content = "안녕하세여.";
+    public int getLike() {
+        return like;
     }
 
-    void test2() {
-        this.num = 2;
-        this.title = "반갑습니다.";
-        this.content = "반갑습니다.";
+    public void setLike(int like) {
+        this.like = like;
     }
-
-    void test3() {
-        this.num = 3;
-        this.title = "다음에봐요.";
-        this.content = "다음에봐요.";
-    }
-
 }

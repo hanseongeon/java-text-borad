@@ -151,8 +151,9 @@ public class BoardApp {
                 System.out.println("등록 날짜 : " + cal1.get(Calendar.YEAR) + "." + (cal1.get(Calendar.MONTH) + 1) + "." + cal1.get(Calendar.DAY_OF_MONTH) + " " + cal1.get(Calendar.HOUR) + ":" + cal1.get(Calendar.MINUTE) + ":" + cal1.get(Calendar.SECOND));
                 System.out.println("작성자 : " + t.getNickName());
                 System.out.println("조회수 :" + t.getViews());
+                System.out.println("좋아요 : ♥ " + t.getLike());
                 System.out.println("====================");
-                System.out.printf("상세보기 기능을 선택해주세요(1. 댓글 등록, 2. 추천, 3. 수정, 4. 삭제, 5. 목록으로) :");
+                System.out.printf("상세보기 기능을 선택해주세요(1. 댓글 등록, 2. 좋아요, 3. 수정, 4. 삭제, 5. 목록으로) :");
                 int choice = Integer.parseInt(sc.nextLine());
                 if (choice == 1) {
                     System.out.printf("댓글 내용 :");
@@ -163,7 +164,18 @@ public class BoardApp {
                         }
                     }
                 } else if (choice == 2) {
-
+                    if(id.get(index).getLike() == 0) {
+                        int like = arr.get(index).getLike();
+                        like++;
+                        arr.get(index).setLike(like);
+                        t.setLike(like);
+                        System.out.println("해당 게시물을 좋아합니다.");
+                    } else if(id.get(index).getLike() == 1){
+                        int unlike = arr.get(index).getLike();
+                        unlike -=1;
+                        arr.get(index).setLike(unlike);
+                        t.setLike(unlike);
+                    }
                 } else if (choice == 3) {
                     if (arr.get(index).getNickName().equals(globalNickName)) {
                         System.out.printf("변경할 제목 : ");
