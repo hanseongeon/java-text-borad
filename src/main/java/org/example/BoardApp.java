@@ -51,7 +51,6 @@ public class BoardApp {
             } else if (cmd.equals("add")) {
                 if (login == 0) {
                     System.out.println("로그인 해주세요.");
-                    continue;
                 } else {
                     text t1 = new text();
                     Calendar cal1 = Calendar.getInstance();
@@ -59,7 +58,6 @@ public class BoardApp {
                     String title = sc.nextLine();
                     if (title.trim().isEmpty()) {
                         System.out.println("잘못된 입력 방법입니다. 다시 시도해주세요.");
-                        continue;
                     }
                     t1.setTitle(title);
                     System.out.printf("게시물 내용을 입력해주세요 : ");
@@ -83,14 +81,12 @@ public class BoardApp {
             } else if (cmd.equals("update")) {
                 if (login == 0) {
                     System.out.println("로그인 해주세요.");
-                    continue;
                 } else {
                     System.out.printf("수정할 게시물 번호 : ");
                     int num1 = Integer.parseInt(sc.nextLine());
                     int index = findIndexById(num1);
                     if (index == -1) {
                         System.out.println("없는게시물 입니다.");
-                        continue;
                     }
                     if (arr.get(index).getNickName().equals(globalNickName)) {
                         System.out.printf("변경할 제목 : ");
@@ -104,13 +100,11 @@ public class BoardApp {
                         cal.set(index, cal1);
                     } else {
                         System.out.println("자신의 게시물만 수정 할 수 있습니다.");
-                        continue;
                     }
                 }
             } else if (cmd.equals("delete")) {
                 if (login == 0) {
                     System.out.println("로그인 해주세요.");
-                    continue;
                 } else {
 
                     System.out.printf("삭제할 게시물 번호 : ");
@@ -118,14 +112,12 @@ public class BoardApp {
                     int index = findIndexById(num1);
                     if (index == -1) {
                         System.out.println("없는게시물 입니다.");
-                        continue;
                     }
                     if (arr.get(index).getNickName().equals(globalNickName)) {
                         arr.remove(index);
                         System.out.println("삭제가 완료 되었습니다.");
                     } else {
                         System.out.println("자신의 게시물만 삭제 할 수 있습니다.");
-                        continue;
                     }
                 }
             } else if (cmd.equals("detail")) {
@@ -134,7 +126,6 @@ public class BoardApp {
                 int index = findIndexById(num1);
                 if (index == -1) {
                     System.out.println("없는게시물 입니다.");
-                    continue;
                 }
                 text t = new text();
                 t = arr.get(index);
@@ -172,7 +163,6 @@ public class BoardApp {
                 } else if (choice == 2) {
                     if (login == 0) {
                         System.out.println("로그인 해주세요.");
-                        continue;
                     } else {
                         if (id.get(index).getLike() == 0) {
 //                            int like = arr.get(index).getLike();
@@ -191,7 +181,6 @@ public class BoardApp {
                 } else if (choice == 3) {
                     if (login == 0) {
                         System.out.println("로그인 해주세요.");
-                        continue;
                     } else {
                         if (arr.get(index).getNickName().equals(globalNickName)) {
                             System.out.printf("변경할 제목 : ");
@@ -205,13 +194,13 @@ public class BoardApp {
                             cal.set(index, cal2);
                         } else {
                             System.out.println("자신의 게시물만 수정 할 수 있습니다.");
-                            continue;
+
                         }
                     }
                 } else if (choice == 4) {
                     if (login == 0) {
                         System.out.println("로그인 해주세요.");
-                        continue;
+
                     } else {
                         if (arr.get(index).getNickName().equals(globalNickName)) {
                             System.out.printf("게시물을 삭제하시겠습니까? :");
@@ -229,7 +218,7 @@ public class BoardApp {
                         }
                     }
                 } else if (choice == 5) {
-                    continue;
+
                 }
             } else if (cmd.equals("search")) {
                 System.out.printf("검색 키워드를 입력해주세요 :");
