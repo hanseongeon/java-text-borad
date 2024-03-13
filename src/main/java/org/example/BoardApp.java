@@ -17,7 +17,7 @@ public class BoardApp {
         ArrayList<Comments> com = new ArrayList<>();
         int Textnumber = 4;
         int login = 0;
-        int memberNumber = 0;
+        int memberNumber = 1;
         String globalNickName = "";
         text a = new text(1, "안녕하세요 반갑습니다", "자바 공부중이에요");
         text a2 = new text(2, "자바 질문 할게요", "자바 공부중이에요");
@@ -255,18 +255,21 @@ public class BoardApp {
                 System.out.printf("닉네임을 입력해주세요 :");
                 String nickName = sc.nextLine();
                 PersonId person = new PersonId(Id, pw, nickName);
+                person.setMemberNumber(memberNumber);
                 id.add(person);
-                if (id.size() >= 2) {
-                    for (int i = 0; i < id.size(); i++) {
-                        for (int b = 1; b < id.size(); b++) {
-                            if (id.get(i).getId().equals(id.get(b).getId())) {
-                                System.out.println("중복된 아이디 입니다.");
-                                id.remove(b);
-                            }
+                memberNumber++;
+                for(int i = 0; i < id.size(); i++){
+                    if(id.get(i).getMemberNumber() != person.getMemberNumber()){
+                        if(id.get(i).getId().equals(person.getId())){
+                            System.out.println("중복된 아이디입니다.");
+                            id.remove((person.getMemberNumber()-1));
+                            break;
                         }
+                    }else{
+                        System.out.println("==== 회원가입이 완료되었습니다. ====");
                     }
                 }
-                    System.out.println("==== 회원가입이 완료되었습니다. ====");
+
             } else if (cmd.equals("login")) {
                 if (login == 1) {
                     System.out.println("이미 로그인 되어있습니다.");
@@ -285,11 +288,11 @@ public class BoardApp {
                                 globalNickName = p1.getNickName();
                             } else {
                                 System.out.println("비밀번호가 틀렸습니다.");
-                                continue;
+                                break;
                             }
-                        }else if(!p1.id.equals(idin)){
+                        } else if (!p1.id.equals(idin)) {
                             System.out.println("회원정보가 없습니다.\n회원가입을 해주세요.");
-                            continue;
+                            break;
                         }
                     }
                 }
