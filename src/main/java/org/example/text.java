@@ -1,15 +1,33 @@
 package org.example;
 
+import java.time.LocalDateTime;
+
 class text {
     Comments com = new Comments();
     private String title;
     private String content;
 
     private int num;
-    private int indexNum;
+
     private int views;
+    private String nickName;
+    text (){
 
+    }
 
+     text(int num , String title, String content) {
+        this.title = title;
+        this.content = content;
+        this.num = num;
+    }
+
+    public void setNickName(String nickName) {
+        this.nickName = nickName;
+    }
+
+    public String getNickName() {
+        return nickName;
+    }
 
     public int getViews() {
         return views;
@@ -19,13 +37,7 @@ class text {
         this.views = views;
     }
 
-    public void setIndexNum(int indexNum) {
-        this.indexNum = indexNum;
-    }
 
-    public int getIndexNum() {
-        return indexNum;
-    }
 
     public String getTitle() {
         return title;
