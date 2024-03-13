@@ -4,21 +4,23 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.Calendar;
 
-public class BoardApp {
+public class BoardAppMethod {
     ArrayList<text> arr = new ArrayList<>();
     ArrayList<Comments> com = new ArrayList<>();
+    Scanner sc = new Scanner(System.in);
+    ArrayList<PersonId> id = new ArrayList<>();
+    ArrayList<Calendar> cal = new ArrayList<>();
+
+    int Textnumber = 4;
+    int login = 0;
+    int memberNumber = 0;
+    String globalNickName = "";
 
     public void run() {
-        Scanner sc = new Scanner(System.in);
-        ArrayList<PersonId> id = new ArrayList<>();
-        ArrayList<Calendar> cal = new ArrayList<>();
+        ArrayList<Comments> com = new ArrayList<>();
         // 반복 횟수 정할 수 없음 -> 무한 반복 구조
 
-        ArrayList<Comments> com = new ArrayList<>();
-        int Textnumber = 4;
-        int login = 0;
-        int memberNumber = 0;
-        String globalNickName = "";
+
         text a = new text(1, "안녕하세요 반갑습니다", "자바 공부중이에요");
         text a2 = new text(2, "자바 질문 할게요", "자바 공부중이에요");
         text a3 = new text(3, "안녕하세요 ", "자바 공부중이에요");
@@ -49,37 +51,9 @@ public class BoardApp {
                 System.out.println("프로그램을 종료합니다.");
                 break;
             } else if (cmd.equals("add")) {
-                if (login == 0) {
-                    System.out.println("로그인 해주세요.");
-                    continue;
-                } else {
-                    text t1 = new text();
-                    Calendar cal1 = Calendar.getInstance();
-                    System.out.printf("게시물 제목을 입력해주세요 : ");
-                    String title = sc.nextLine();
-                    if (title.trim().isEmpty()) {
-                        System.out.println("잘못된 입력 방법입니다. 다시 시도해주세요.");
-                        continue;
-                    }
-                    t1.setTitle(title);
-                    System.out.printf("게시물 내용을 입력해주세요 : ");
-                    String content = sc.nextLine();
-                    t1.setContent(content);
-                    t1.setNum(Textnumber);
-                    Textnumber++;
-                    t1.setNickName(globalNickName);
-                    arr.add(t1);
-                    cal.add(cal1);
-                    System.out.println("게시물이 저장 되었습니다.");
-                }
+               add();
             } else if (cmd.equals("list")) {
-
-                for (text t1 : arr) {
-                    System.out.println("===========");
-                    System.out.println("번호 : " + t1.getNum());
-                    System.out.println("제목 : " + t1.getTitle());
-                    System.out.println("===========");
-                }
+                list();
             } else if (cmd.equals("update")) {
                 if (login == 0) {
                     System.out.println("로그인 해주세요.");
@@ -266,7 +240,7 @@ public class BoardApp {
                         }
                     }
                 }
-                    System.out.println("==== 회원가입이 완료되었습니다. ====");
+                System.out.println("==== 회원가입이 완료되었습니다. ====");
             } else if (cmd.equals("login")) {
                 if (login == 1) {
                     System.out.println("이미 로그인 되어있습니다.");
@@ -320,6 +294,39 @@ public class BoardApp {
         }
 
 
+    }
+
+    private void list() {
+        for (text t1 : arr) {
+            System.out.println("===========");
+            System.out.println("번호 : " + t1.getNum());
+            System.out.println("제목 : " + t1.getTitle());
+            System.out.println("===========");
+        }
+    }
+
+    private void add() {
+        if (login == 0) {
+            System.out.println("로그인 해주세요.");
+                 } else {
+            text t1 = new text();
+            Calendar cal1 = Calendar.getInstance();
+            System.out.printf("게시물 제목을 입력해주세요 : ");
+            String title = sc.nextLine();
+            if (title.trim().isEmpty()) {
+                System.out.println("잘못된 입력 방법입니다. 다시 시도해주세요.");
+               }
+            t1.setTitle(title);
+            System.out.printf("게시물 내용을 입력해주세요 : ");
+            String content = sc.nextLine();
+            t1.setContent(content);
+            t1.setNum(Textnumber);
+            Textnumber++;
+            t1.setNickName(globalNickName);
+            arr.add(t1);
+            cal.add(cal1);
+            System.out.println("게시물이 저장 되었습니다.");
+        }
     }
 
     public int findIndexById(int id) {
