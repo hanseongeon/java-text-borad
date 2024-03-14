@@ -1,5 +1,7 @@
 package org.example.domain;
 
+import org.example.base.CommonUtil;
+
 import java.util.ArrayList;
 
 public class ArticleRepository {
