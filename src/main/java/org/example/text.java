@@ -12,11 +12,13 @@ class text {
     private int views;
     private String nickName;
     private int like;
-    text (){
+
+
+    text() {
 
     }
 
-     text(int num , String title, String content) {
+    text(int num, String title, String content) {
         this.title = title;
         this.content = content;
         this.num = num;
@@ -37,7 +39,6 @@ class text {
     public void setViews(int views) {
         this.views = views;
     }
-
 
 
     public String getTitle() {

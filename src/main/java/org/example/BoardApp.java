@@ -103,7 +103,7 @@ public class BoardApp {
                         } else {
                             System.out.println("자신의 게시물만 수정 할 수 있습니다.");
                         }
-                    }catch (Exception e){
+                    } catch (Exception e) {
                         System.out.println("숫자를 입력해주셔야 합니다.");
                     }
                 }
@@ -124,7 +124,7 @@ public class BoardApp {
                         } else {
                             System.out.println("자신의 게시물만 삭제 할 수 있습니다.");
                         }
-                    }catch (Exception e){
+                    } catch (Exception e) {
                         System.out.println("숫자를 입력해주셔야 합니다.");
                     }
                 }
@@ -175,19 +175,11 @@ public class BoardApp {
                         if (login == 0) {
                             System.out.println("로그인 해주세요.");
                         } else {
-                            if (id.get(index).getLike() == 0) {
-//                            int like = arr.get(index).getLike();
-//                            like++;
-//                            arr.get(index).setLike(like);
-//                            t.setLike(like);
-//                            System.out.println("해당 게시물을 좋아합니다.");
-
-                            } else if (id.get(index).getLike() == 1) {
-//                            int unlike = arr.get(index).getLike();
-//                            unlike -= 1;
-//                            arr.get(index).setLike(unlike);
-//                            t.setLike(unlike);
-                            }
+                            int like = arr.get(index).getLike();
+                            like++;
+                            arr.get(index).setLike(like);
+                            t.setLike(like);
+                            System.out.println("해당 게시물을 좋아합니다.");
                         }
                     } else if (choice == 3) {
                         if (login == 0) {
@@ -231,7 +223,7 @@ public class BoardApp {
                     } else if (choice == 5) {
 
                     }
-                }catch (Exception e){
+                } catch (Exception e) {
                     System.out.println("숫자를 입력해주셔야 합니다.");
                 }
             } else if (cmd.equals("search")) {
@@ -321,10 +313,7 @@ public class BoardApp {
             } else {
                 System.out.println("올바른 명령어가 아닙니다.");
             }
-
         }
-
-
     }
 
     public int findIndexById(int id) {
@@ -340,9 +329,3 @@ public class BoardApp {
         return -1;
     }
 }
-
-// 수정사항
-//1. PRIVATE 이용하여 캡슐화 O
-//2. Interger.parseInt 할때 문자들어갈경우 예외처리;
-//3. 저장되어있는 텍스트 가져와서 직접수정하기.O
-//4. 없는번호 예외처리 O
