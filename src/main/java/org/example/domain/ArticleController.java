@@ -62,6 +62,7 @@ public class ArticleController { // Model + Controller
 
         articleRepository.deleteArticle(article);
         System.out.printf("%d 게시물이 삭제되었습니다.\n", inputId);
+
     }
 
     public void update() {
