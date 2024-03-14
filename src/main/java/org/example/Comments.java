@@ -1,9 +1,18 @@
 package org.example;
 
 public class Comments {
-    int num;
-    String comments;
+    private int num;
+    private String comments;
 
+    private int textNumber;
+
+    public void setTextNumber(int textNumber) {
+        this.textNumber = textNumber;
+    }
+
+    public int getTextNumber() {
+        return textNumber;
+    }
 
     public String getComments() {
         return comments;

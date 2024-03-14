@@ -83,106 +83,13 @@ public class BoardApp {
                 if (login == 0) {
                     System.out.println("로그인 해주세요.");
                 } else {
-                    System.out.printf("수정할 게시물 번호 : ");
-                    int num1 = Integer.parseInt(sc.nextLine());
-                    int index = findIndexById(num1);
-                    if (index == -1) {
-                        System.out.println("없는게시물 입니다.");
-                    }
-                    if (arr.get(index).getNickName().equals(globalNickName)) {
-                        System.out.printf("변경할 제목 : ");
-                        String upTitle = sc.nextLine();
-                        System.out.printf("변경할 내용 : ");
-                        String upContent = sc.nextLine();
-                        arr.get(index).setTitle(upTitle);
-                        arr.get(index).setContent(upContent);
-                        System.out.println("수정이 완료 되었습니다.");
-                        Calendar cal1 = Calendar.getInstance();
-                        cal.set(index, cal1);
-                    } else {
-                        System.out.println("자신의 게시물만 수정 할 수 있습니다.");
-                    }
-                }
-            } else if (cmd.equals("delete")) {
-                if (login == 0) {
-                    System.out.println("로그인 해주세요.");
-                } else {
-
-                    System.out.printf("삭제할 게시물 번호 : ");
-                    int num1 = Integer.parseInt(sc.nextLine());
-                    int index = findIndexById(num1);
-                    if (index == -1) {
-                        System.out.println("없는게시물 입니다.");
-                    }
-                    if (arr.get(index).getNickName().equals(globalNickName)) {
-                        arr.remove(index);
-                        System.out.println("삭제가 완료 되었습니다.");
-                    } else {
-                        System.out.println("자신의 게시물만 삭제 할 수 있습니다.");
-                    }
-                }
-            } else if (cmd.equals("detail")) {
-                System.out.printf("상세보기 할 게시물 번호를 입력해주세요 :");
-                int num1 = Integer.parseInt(sc.nextLine());
-                int index = findIndexById(num1);
-                if (index == -1) {
-                    System.out.println("없는게시물 입니다.");
-                }
-                text t = new text();
-                t = arr.get(index);
-                Calendar cal1 = Calendar.getInstance();
-                cal1 = cal.get(index);
-                int view = arr.get(index).getViews();
-                view++;
-                arr.get(index).setViews(view);
-                t.setViews(view);
-//                t.com.setComments(com);
-                System.out.printf("=====%d번 게시물=====\n", t.getNum());
-                System.out.println("번호 : " + t.getNum());
-                System.out.println("제목 : " + t.getTitle());
-                System.out.println("내용 : " + t.getContent());
-                System.out.println("등록 날짜 : " + cal1.get(Calendar.YEAR) + "." + (cal1.get(Calendar.MONTH) + 1) + "." + cal1.get(Calendar.DAY_OF_MONTH) + " " + cal1.get(Calendar.HOUR) + ":" + cal1.get(Calendar.MINUTE) + ":" + cal1.get(Calendar.SECOND));
-                System.out.println("작성자 : " + t.getNickName());
-                System.out.println("조회수 :" + t.getViews());
-                System.out.println("좋아요 : ❤ " + t.getLike());
-                System.out.println("====================");
-                if (com.size() != 0) {
-                    System.out.println("======= 댓글 =======");
-                    System.out.println("댓글내용 : " + t.com.getComments());
-                }
-                System.out.printf("상세보기 기능을 선택해주세요(1. 댓글 등록, 2. 좋아요, 3. 수정, 4. 삭제, 5. 목록으로) :");
-                int choice = Integer.parseInt(sc.nextLine());
-                if (choice == 1) {
-                    System.out.printf("댓글 내용 :");
-                    String comments = sc.nextLine();
-                    for (text t1 : arr) {
-                        if (index == (t1.getNum() - 1)) {
-                            Comments peopleCom = new Comments();
-                            com.add(peopleCom);
+                    try {
+                        System.out.printf("수정할 게시물 번호 : ");
+                        int num1 = Integer.parseInt(sc.nextLine());
+                        int index = findIndexById(num1);
+                        if (index == -1) {
+                            System.out.println("없는게시물 입니다.");
                         }
-                    }
-                } else if (choice == 2) {
-                    if (login == 0) {
-                        System.out.println("로그인 해주세요.");
-                    } else {
-                        if (id.get(index).getLike() == 0) {
-//                            int like = arr.get(index).getLike();
-//                            like++;
-//                            arr.get(index).setLike(like);
-//                            t.setLike(like);
-//                            System.out.println("해당 게시물을 좋아합니다.");
-
-                        } else if (id.get(index).getLike() == 1) {
-//                            int unlike = arr.get(index).getLike();
-//                            unlike -= 1;
-//                            arr.get(index).setLike(unlike);
-//                            t.setLike(unlike);
-                        }
-                    }
-                } else if (choice == 3) {
-                    if (login == 0) {
-                        System.out.println("로그인 해주세요.");
-                    } else {
                         if (arr.get(index).getNickName().equals(globalNickName)) {
                             System.out.printf("변경할 제목 : ");
                             String upTitle = sc.nextLine();
@@ -191,35 +98,141 @@ public class BoardApp {
                             arr.get(index).setTitle(upTitle);
                             arr.get(index).setContent(upContent);
                             System.out.println("수정이 완료 되었습니다.");
-                            Calendar cal2 = Calendar.getInstance();
-                            cal.set(index, cal2);
+                            Calendar cal1 = Calendar.getInstance();
+                            cal.set(index, cal1);
                         } else {
                             System.out.println("자신의 게시물만 수정 할 수 있습니다.");
-
                         }
+                    }catch (Exception e){
+                        System.out.println("숫자를 입력해주셔야 합니다.");
                     }
-                } else if (choice == 4) {
-                    if (login == 0) {
-                        System.out.println("로그인 해주세요.");
-
-                    } else {
+                }
+            } else if (cmd.equals("delete")) {
+                if (login == 0) {
+                    System.out.println("로그인 해주세요.");
+                } else {
+                    try {
+                        System.out.printf("삭제할 게시물 번호 : ");
+                        int num1 = Integer.parseInt(sc.nextLine());
+                        int index = findIndexById(num1);
+                        if (index == -1) {
+                            System.out.println("없는게시물 입니다.");
+                        }
                         if (arr.get(index).getNickName().equals(globalNickName)) {
-                            System.out.printf("게시물을 삭제하시겠습니까? :");
-                            String choose = sc.nextLine();
-                            if (choose.equals("예") || choose.equals("yes")) {
-                                arr.remove(index);
-                                System.out.println("게시물이 삭제되었습니다.");
-                            } else if (choose.equals("아니오") || choose.equals("no")) {
-                                System.out.println("게시물 삭제가 취소되었습니다.");
-                                continue;
-                            }
+                            arr.remove(index);
+                            System.out.println("삭제가 완료 되었습니다.");
                         } else {
                             System.out.println("자신의 게시물만 삭제 할 수 있습니다.");
-                            continue;
+                        }
+                    }catch (Exception e){
+                        System.out.println("숫자를 입력해주셔야 합니다.");
+                    }
+                }
+            } else if (cmd.equals("detail")) {
+                try {
+                    System.out.printf("상세보기 할 게시물 번호를 입력해주세요 :");
+                    int num1 = Integer.parseInt(sc.nextLine());
+                    int index = findIndexById(num1);
+                    if (index == -1) {
+                        System.out.println("없는게시물 입니다.");
+                    }
+                    text t = new text();
+                    t = arr.get(index);
+                    Calendar cal1 = Calendar.getInstance();
+                    cal1 = cal.get(index);
+                    int view = arr.get(index).getViews();
+                    view++;
+                    arr.get(index).setViews(view);
+                    t.setViews(view);
+                    System.out.printf("=====%d번 게시물=====\n", t.getNum());
+                    System.out.println("번호 : " + t.getNum());
+                    System.out.println("제목 : " + t.getTitle());
+                    System.out.println("내용 : " + t.getContent());
+                    System.out.println("등록 날짜 : " + cal1.get(Calendar.YEAR) + "." + (cal1.get(Calendar.MONTH) + 1) + "." + cal1.get(Calendar.DAY_OF_MONTH) + " " + cal1.get(Calendar.HOUR) + ":" + cal1.get(Calendar.MINUTE) + ":" + cal1.get(Calendar.SECOND));
+                    System.out.println("작성자 : " + t.getNickName());
+                    System.out.println("조회수 :" + t.getViews());
+                    System.out.println("좋아요 : ❤ " + t.getLike());
+                    System.out.println("====================");
+                    if (com.size() >= 1) {
+                        System.out.println("======= 댓글 =======");
+                        for (int i = 0; i < com.size(); i++) {
+                            if (com.get(i).getTextNumber() == t.getNum()) {
+                                System.out.println("댓글내용 : " + com.get(i).getComments());
+                            }
                         }
                     }
-                } else if (choice == 5) {
+                    System.out.printf("상세보기 기능을 선택해주세요(1. 댓글 등록, 2. 좋아요, 3. 수정, 4. 삭제, 5. 목록으로) :");
+                    int choice = Integer.parseInt(sc.nextLine());
+                    if (choice == 1) {
+                        System.out.printf("댓글 내용 :");
+                        String comments = sc.nextLine();
+                        Comments newCom = new Comments();
+                        newCom.setComments(comments);
+                        newCom.setTextNumber(t.getNum());
+                        com.add(newCom);
+                        System.out.println("댓글을 작성했습니다.");
+                    } else if (choice == 2) {
+                        if (login == 0) {
+                            System.out.println("로그인 해주세요.");
+                        } else {
+                            if (id.get(index).getLike() == 0) {
+//                            int like = arr.get(index).getLike();
+//                            like++;
+//                            arr.get(index).setLike(like);
+//                            t.setLike(like);
+//                            System.out.println("해당 게시물을 좋아합니다.");
 
+                            } else if (id.get(index).getLike() == 1) {
+//                            int unlike = arr.get(index).getLike();
+//                            unlike -= 1;
+//                            arr.get(index).setLike(unlike);
+//                            t.setLike(unlike);
+                            }
+                        }
+                    } else if (choice == 3) {
+                        if (login == 0) {
+                            System.out.println("로그인 해주세요.");
+                        } else {
+                            if (arr.get(index).getNickName().equals(globalNickName)) {
+                                System.out.printf("변경할 제목 : ");
+                                String upTitle = sc.nextLine();
+                                System.out.printf("변경할 내용 : ");
+                                String upContent = sc.nextLine();
+                                arr.get(index).setTitle(upTitle);
+                                arr.get(index).setContent(upContent);
+                                System.out.println("수정이 완료 되었습니다.");
+                                Calendar cal2 = Calendar.getInstance();
+                                cal.set(index, cal2);
+                            } else {
+                                System.out.println("자신의 게시물만 수정 할 수 있습니다.");
+
+                            }
+                        }
+                    } else if (choice == 4) {
+                        if (login == 0) {
+                            System.out.println("로그인 해주세요.");
+
+                        } else {
+                            if (arr.get(index).getNickName().equals(globalNickName)) {
+                                System.out.printf("게시물을 삭제하시겠습니까? :");
+                                String choose = sc.nextLine();
+                                if (choose.equals("예") || choose.equals("yes")) {
+                                    arr.remove(index);
+                                    System.out.println("게시물이 삭제되었습니다.");
+                                } else if (choose.equals("아니오") || choose.equals("no")) {
+                                    System.out.println("게시물 삭제가 취소되었습니다.");
+                                    continue;
+                                }
+                            } else {
+                                System.out.println("자신의 게시물만 삭제 할 수 있습니다.");
+                                continue;
+                            }
+                        }
+                    } else if (choice == 5) {
+
+                    }
+                }catch (Exception e){
+                    System.out.println("숫자를 입력해주셔야 합니다.");
                 }
             } else if (cmd.equals("search")) {
                 System.out.printf("검색 키워드를 입력해주세요 :");
@@ -248,14 +261,14 @@ public class BoardApp {
                 person.setMemberNumber(memberNumber);
                 id.add(person);
                 memberNumber++;
-                for(int i = 0; i < id.size(); i++){
-                    if(id.get(i).getMemberNumber() != person.getMemberNumber()){
-                        if(id.get(i).getId().equals(person.getId())){
+                for (int i = 0; i < id.size(); i++) {
+                    if (id.get(i).getMemberNumber() != person.getMemberNumber()) {
+                        if (id.get(i).getId().equals(person.getId())) {
                             System.out.println("중복된 아이디입니다.");
-                            id.remove((person.getMemberNumber()-1));
+                            id.remove((person.getMemberNumber() - 1));
                             break;
                         }
-                    }else{
+                    } else {
                         System.out.println("==== 회원가입이 완료되었습니다. ====");
                     }
                 }
@@ -280,9 +293,6 @@ public class BoardApp {
                                 System.out.println("비밀번호가 틀렸습니다.");
                                 break;
                             }
-                        } else if (!p1.id.equals(idin)) {
-                            System.out.println("회원정보가 없습니다.\n회원가입을 해주세요.");
-                            break;
                         }
                     }
                 }
@@ -308,6 +318,8 @@ public class BoardApp {
                         continue;
                     }
                 }
+            } else {
+                System.out.println("올바른 명령어가 아닙니다.");
             }
 
         }
@@ -329,9 +341,8 @@ public class BoardApp {
     }
 }
 
-
 // 수정사항
-// 1. PRIVATE 이용하여 캡슐화 O
+//1. PRIVATE 이용하여 캡슐화 O
 //2. Interger.parseInt 할때 문자들어갈경우 예외처리;
 //3. 저장되어있는 텍스트 가져와서 직접수정하기.O
 //4. 없는번호 예외처리 O
